@@ -1,0 +1,14 @@
+{
+  "name": "react-proshop",
+  "version": "1.0.0",
+  "description": "MERN STACK ONLINE SHOP",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "ryanb1303",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
