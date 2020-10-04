@@ -3,13 +3,23 @@
   "version": "1.0.0",
   "description": "MERN STACK ONLINE SHOP",
   "main": "server.js",
+  "type": "module",
   "scripts": {
     "start": "node backend/server",
+    "server": "nodemon backend/server",
+    "client": "npm run start --prefix frontend",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "ryanb1303",
   "license": "MIT",
   "dependencies": {
-    "express": "^4.17.1"
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "pug": "^3.0.0"
+  },
+  "devDependencies": {
+    "concurrently": "^5.3.0",
+    "nodemon": "^2.0.4"
   }
 }
