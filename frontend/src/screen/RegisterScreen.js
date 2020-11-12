@@ -4,7 +4,7 @@ import { Row, Form, Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import Message from "../components/Message";
 import Loader from "../components/Loader";
-import { login } from "../actions/userActions";
+import { register } from "../actions/userActions";
 import FormContainer from "../components/FormContainer";
 
 const RegisterScreen = ({ location, history }) => {
@@ -17,9 +17,9 @@ const RegisterScreen = ({ location, history }) => {
   // redux 101 in my understanding
   const dispatch = useDispatch();
   // 1 . Dispatch
-  const userLogin = useSelector((state) => state.userLogin);
+  const userRegister = useSelector((state) => state.userRegister);
   // 2. Selector => to select reducer from store
-  const { loading, error, userInfo } = userLogin;
+  const { loading, error, userInfo } = userRegister;
   // 3. the state from reducer
   useEffect(() => {
     if (userInfo) {
@@ -45,13 +45,13 @@ const RegisterScreen = ({ location, history }) => {
 
   const formSubmitHandler = (e) => {
     e.preventDefault();
-    dispatch(login(email, password));
+    dispatch(register(name, email, password));
     // 4. call Action using dispatch -> the login in here is actually Action from userAction method called 'login'
   };
 
   return (
     <FormContainer>
-      <h1>Sign In</h1>
+      <h1>Register New User</h1>
       {error && <Message variant="danger">{error}</Message>}
       {loading && <Loader> </Loader>}
       <Form onSubmit={formSubmitHandler}>
@@ -109,7 +109,9 @@ const RegisterScreen = ({ location, history }) => {
       </Form>
       <Row className="py-3">
         Have Account ? &nbsp;
-        <Link to="/login">Login</Link>
+        <Link to={redirect ? `/login?redirect=${redirect}` : "/login"}>
+          Login
+        </Link>
         {/* {redirect ? `/login?redirect=${redirect}` : "/login"} */}
       </Row>
     </FormContainer>

@@ -4,16 +4,12 @@ import { LinkContainer } from "react-router-bootstrap";
 import {
   Row,
   Col,
-  ListGroup,
-  Form,
   Image,
   Button,
   Card,
   Container,
   Breadcrumb,
 } from "react-bootstrap";
-import Message from "../components/Message";
-import { Link } from "react-router-dom";
 import { addToCart, removeFromCart } from "../actions/cartActions";
 
 const CartScreen = ({ match, location, history }) => {
