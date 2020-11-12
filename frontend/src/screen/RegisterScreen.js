@@ -12,6 +12,7 @@ const RegisterScreen = ({ location, history }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordConfirm, setPasswordConfirm] = useState("");
+  const [message, setMessage] = useState("");
 
   const redirect = location.search ? location.search.split("=")[1] : "/";
   // redux 101 in my understanding
@@ -43,9 +44,17 @@ const RegisterScreen = ({ location, history }) => {
     return setPasswordConfirm(p.target.value);
   };
 
+  const messageHandler = (e) => {
+    return setMessage(e);
+  };
+
   const formSubmitHandler = (e) => {
     e.preventDefault();
-    dispatch(register(name, email, password));
+    // check if password match in ternary if match -> dispatch register if not show setmessage to "Password not match"
+    password === passwordConfirm
+      ? dispatch(register(name, email, password))
+      : messageHandler("Password not match");
+    // dispatch(register(name, email, password));
     // 4. call Action using dispatch -> the login in here is actually Action from userAction method called 'login'
   };
 
@@ -91,8 +100,9 @@ const RegisterScreen = ({ location, history }) => {
             }}
           />
         </Form.Group>
+        {message && <Message variant="danger">{message}</Message>}
         {/* Password Confirm */}
-        <Form.Group controlId="formBasicPassword">
+        <Form.Group controlId="formBasicPasswordConfirm">
           <Form.Label>Confirm Password</Form.Label>
           <Form.Control
             type="password"

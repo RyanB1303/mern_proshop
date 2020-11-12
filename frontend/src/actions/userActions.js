@@ -59,6 +59,12 @@ export const register = (name, email, password) => async (dispatch) => {
       payload: data,
     });
 
+    //dispatch USER LOGIN SUCCESS to redirect to login if register success
+    dispatch({
+      type: USER_LOGIN_SUCCESS,
+      payload: data,
+    });
+
     localStorage.setItem("userInfo", JSON.stringify(data));
   } catch (error) {
     dispatch({
@@ -74,4 +80,5 @@ export const register = (name, email, password) => async (dispatch) => {
 export const logout = () => (dispatch) => {
   localStorage.removeItem("userInfo");
   dispatch({ type: USER_LOGOUT });
+  window.location.reload();
 };
