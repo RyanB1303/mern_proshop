@@ -6,9 +6,12 @@ import Message from "../components/Message";
 import Loader from "../components/Loader";
 import { login } from "../actions/userActions";
 import FormContainer from "../components/FormContainer";
-const LoginScreen = ({ location, history }) => {
+
+const RegisterScreen = ({ location, history }) => {
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [passwordConfirm, setPasswordConfirm] = useState("");
 
   const redirect = location.search ? location.search.split("=")[1] : "/";
   // redux 101 in my understanding
@@ -24,12 +27,20 @@ const LoginScreen = ({ location, history }) => {
     }
   }, [history, userInfo, redirect]);
 
+  const nameHandler = (e) => {
+    return setName(e.target.value);
+  };
+
   const emailHandler = (e) => {
     return setEmail(e.target.value);
   };
 
   const passwordHandler = (p) => {
     return setPassword(p.target.value);
+  };
+
+  const passwordConfirmHandler = (p) => {
+    return setPasswordConfirm(p.target.value);
   };
 
   const formSubmitHandler = (e) => {
@@ -44,6 +55,19 @@ const LoginScreen = ({ location, history }) => {
       {error && <Message variant="danger">{error}</Message>}
       {loading && <Loader> </Loader>}
       <Form onSubmit={formSubmitHandler}>
+        {/* User Name */}
+        <Form.Group controlId="formBasicName">
+          <Form.Label>Name</Form.Label>
+          <Form.Control
+            type="text"
+            placeholder="Enter Your Name"
+            value={name}
+            onChange={(e) => {
+              nameHandler(e);
+            }}
+          />
+        </Form.Group>
+        {/* Email Address */}
         <Form.Group controlId="formBasicEmail">
           <Form.Label>Email address</Form.Label>
           <Form.Control
@@ -55,7 +79,7 @@ const LoginScreen = ({ location, history }) => {
             }}
           />
         </Form.Group>
-
+        {/* Password */}
         <Form.Group controlId="formBasicPassword">
           <Form.Label>Password</Form.Label>
           <Form.Control
@@ -67,16 +91,29 @@ const LoginScreen = ({ location, history }) => {
             }}
           />
         </Form.Group>
+        {/* Password Confirm */}
+        <Form.Group controlId="formBasicPassword">
+          <Form.Label>Confirm Password</Form.Label>
+          <Form.Control
+            type="password"
+            placeholder="Confirm Password"
+            value={passwordConfirm}
+            onChange={(p) => {
+              passwordConfirmHandler(p);
+            }}
+          />
+        </Form.Group>
         <Button variant="primary" type="submit">
           Submit
         </Button>
       </Form>
       <Row className="py-3">
-        New Customer ? &nbsp;
-        <Link to="/register">Register</Link>
+        Have Account ? &nbsp;
+        <Link to="/login">Login</Link>
+        {/* {redirect ? `/login?redirect=${redirect}` : "/login"} */}
       </Row>
     </FormContainer>
   );
 };
 
-export default LoginScreen;
+export default RegisterScreen;
