@@ -41,6 +41,11 @@ const ProfileScreen = ({ history }) => {
     if (password !== confirPassword) {
       setMessage("Password not match");
     } else {
+      // BUG and Not Implemented :
+      // 1. updateUserProfile not calling state at all
+      // 2. when updating nothing will change until we logout, because theres no animation and state change
+      // 3. the function is usable ,but the experience is shit
+      // 4. in short , we can update the profile, but the update will 'shown' after we logout to refresh the state
       dispatch(updateUserProfile(name, email, password));
     }
   };
