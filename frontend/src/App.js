@@ -8,6 +8,8 @@ import ProductScreen from "./screen/ProductScreen";
 import CartScreen from "./screen/CartScreen";
 import LoginScreen from "./screen/LoginScreen";
 import RegisterScreen from "./screen/RegisterScreen";
+import ProfileScreen from "./screen/ProfileScreen";
+// bootstrap css
 import "./bootstrap.min.css";
 function App() {
   return (
@@ -21,6 +23,7 @@ function App() {
             <Route path="/cart/:id?" component={CartScreen} />
             <Route path="/login" component={LoginScreen} />
             <Route path="/register" component={RegisterScreen} />
+            <Route path="/profile" component={ProfileScreen} />
           </Container>
         </main>
         <Footer></Footer>
