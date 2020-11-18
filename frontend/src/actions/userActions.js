@@ -120,10 +120,7 @@ export const getUserDetail = (id) => async (dispatch, getState) => {
   }
 };
 
-export const updateUserProfile = (name, email, password) => async (
-  dispatch,
-  getState
-) => {
+export const updateUserProfile = (user) => async (dispatch, getState) => {
   try {
     dispatch({
       type: USER_PROFILE_UPDATE_REQUEST,
@@ -138,11 +135,7 @@ export const updateUserProfile = (name, email, password) => async (
         Authorization: `Bearer ${userInfo.token} `,
       },
     };
-    const { data } = await axios.put(
-      `/api/users/profile`,
-      { name, email, password },
-      config
-    );
+    const { data } = await axios.put(`/api/users/profile`, user, config);
     dispatch({
       type: USER_PROFILE_UPDATE_SUCCESS,
       payload: data,

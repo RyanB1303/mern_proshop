@@ -23,6 +23,9 @@ const ProfileScreen = ({ history }) => {
   const cart = useSelector((state) => state.cart);
   const { cartItems } = cart;
 
+  const userUpdate = useSelector((state) => state.userUpdate);
+  const { success } = userUpdate;
+
   useEffect(() => {
     if (!userInfo) {
       history.push("/login");
@@ -46,7 +49,14 @@ const ProfileScreen = ({ history }) => {
       // 2. when updating nothing will change until we logout, because theres no animation and state change
       // 3. the function is usable ,but the experience is shit
       // 4. in short , we can update the profile, but the update will 'shown' after we logout to refresh the state
-      dispatch(updateUserProfile(name, email, password));
+      dispatch(
+        updateUserProfile({
+          id: user._id,
+          name,
+          email,
+          password,
+        })
+      );
     }
   };
 
@@ -55,6 +65,7 @@ const ProfileScreen = ({ history }) => {
       <Col md={3}>
         <h3>{user.name} Profiles</h3>
         {error && <Message variant="danger">{error}</Message>}
+        {success && <Message variant="success">Profile Updated</Message>}
         {loading && <Loader> </Loader>}
         <Form onSubmit={formSubmitHandler}>
           {/* User Name */}
